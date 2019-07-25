@@ -1,0 +1,3 @@
+/groups/ahrens/home/bennettd/miniconda/envs/pyklb
+/groups/ahrens/home/bennettd/miniconda
+/groups/ahrens/home/bennettd/miniconda/envs/napari

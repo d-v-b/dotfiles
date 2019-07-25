@@ -1,0 +1,7 @@
+{
+  "load_extensions": {
+    "jupyter-spark/extension": true,
+    "jupyter-js-widgets/extension": true,
+    "ipyvolume/extension": true
+  }
+}
