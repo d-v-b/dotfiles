@@ -3,6 +3,10 @@
 ;; INSTALL PACKAGES
 ;; --------------------------------------
 
+(require 'ido)
+(ido-mode t)
+
+
 (add-hook 'python-mode-hook
       (lambda ()
         (setq indent-tabs-mode nil)
@@ -20,16 +24,10 @@
 
 (defvar myPackages
   '(better-defaults
-<<<<<<< HEAD
    flycheck
    material-theme
    elpy
    dockerfile-mode))
-=======
-    flycheck
-    material-theme
-    elpy))
->>>>>>> b415989ac8f16a5bfcffc206b4fd31dbcd637d43
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -48,10 +46,6 @@
 (load-theme 'material t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
 
-;; Flycheck
-(global-flycheck-mode)
-(package-install 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -69,11 +63,7 @@
  '(custom-enabled-themes (quote (misterioso)))
  '(fci-rule-color "#37474f")
  '(hl-sexp-background-color "#1c1f26")
-<<<<<<< HEAD
  '(package-selected-packages (quote (magit org-ednaee)))
-=======
- '(package-selected-packages (quote (exec-path-from-shell go-mode org-ednaee)))
->>>>>>> b415989ac8f16a5bfcffc206b4fd31dbcd637d43
  '(python-shell-exec-path (quote ("")))
  '(python-shell-interpreter "/Users/bennettd/anaconda3/bin/python")
  '(vc-annotate-background nil)
