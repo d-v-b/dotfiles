@@ -115,4 +115,4 @@ unset __conda_setup
 export PATH=~/bin:$PATH
 alias pycharm=/opt/pycharm-community-2019.2/bin/pycharm.sh
 # ensure that username and hostname are displayed
-PROMPT="$fg[cyan]%}$USER@%{$fg[green]%}%m ${PROMPT}"
+PROMPT="%{$fg[white]%}%n@%{$fg[green]%}%m%{$reset_color%} ${PROMPT}"
