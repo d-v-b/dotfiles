@@ -1,4 +1,4 @@
-# .bashrc
+# .bashrc for the janelia compute cluster
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
