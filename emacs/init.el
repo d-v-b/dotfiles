@@ -36,15 +36,34 @@
 ;;; ----------------------------------------------------------------------------
 ;;; PATH / environment
 ;;; ----------------------------------------------------------------------------
-;; The snap build of Emacs often starts with a stripped PATH, so external tools
-;; (ruff, basedpyright, ty, emacs-lsp-booster) may not be found.  Import the
-;; shell PATH and add the well-known user bin dirs explicitly.
+;; Emacs (especially the snap build, or any non-login GUI launch) can start with
+;; a stripped PATH, so external tools (ruff, basedpyright, ty, emacs-lsp-booster)
+;; may not be found.  Add the well-known user bin dirs explicitly, then let
+;; exec-path-from-shell import the full login PATH in graphical sessions.
 
-(dolist (dir (list (expand-file-name "~/.local/bin")
-                   (expand-file-name "~/.cargo/bin")))
-  (when (file-directory-p dir)
-    (add-to-list 'exec-path dir)
-    (setenv "PATH" (concat dir path-separator (getenv "PATH")))))
+(defun my/add-exec-dir (dir)
+  "Prepend DIR to `exec-path' and the PATH env var, if DIR exists.
+Return non-nil when DIR was added.  Shared with the OS-specific init files."
+  (let ((dir (expand-file-name dir)))
+    (when (file-directory-p dir)
+      (add-to-list 'exec-path dir)
+      (setenv "PATH" (concat dir path-separator (getenv "PATH")))
+      t)))
+
+;; Common to every platform.
+(mapc #'my/add-exec-dir '("~/.local/bin" "~/.cargo/bin"))
+
+;; OS-specific configuration (extra PATH dirs, platform tweaks) lives in
+;; init-osx.el / init-linux.el beside this file in the dotfiles repo.  Resolve
+;; this file's *true* path first so the fragment loads from the repo even though
+;; ~/.emacs.d/init.el is a symlink -- no need to symlink the fragments too.
+;; Loaded here, early, so any PATH additions land before tools are needed.
+(let* ((this  (file-truename (or load-file-name user-init-file)))
+       (osdir (file-name-directory this))
+       (osel  (pcase system-type
+                ('darwin "init-osx")
+                (_       "init-linux"))))
+  (load (expand-file-name osel osdir) t))   ; t -> no error if the file is absent
 
 (use-package exec-path-from-shell
   :if (memq window-system '(x pgtk mac ns))
