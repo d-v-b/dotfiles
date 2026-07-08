@@ -1,0 +1,34 @@
+# Ghostty — https://ghostty.org/docs/config/reference
+# Ghostty's defaults are deliberately good (shell integration is automatic,
+# JetBrains Mono + Nerd Font symbols are built in), so this stays minimal.
+#
+#   browse themes:  ghostty +list-themes
+#   check config:   ghostty +validate-config
+#   live reload:    cmd+shift+,
+
+# Follow the macOS system appearance
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+
+# Left option is Meta (emacs, Claude Code); right option still types unicode
+macos-option-as-alt = left
+
+# Selecting text copies straight to the system clipboard
+copy-on-select = clipboard
+
+mouse-hide-while-typing = true
+
+# shift+enter inserts a newline (Claude Code, REPLs)
+keybind = shift+enter=text:\n
+
+# Quake-style dropdown from anywhere (macOS will ask for Accessibility access)
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+quick-terminal-position = top
+
+# --- taste; off by default -------------------------------------------------
+# font-size = 14
+# window-padding-x = 8
+# window-padding-y = 8
+# window-padding-balance = true
+# macos-titlebar-style = tabs
+# window-save-state = always
+# background-opacity = 0.95
