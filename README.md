@@ -13,6 +13,11 @@ just setup   # brew-install tools, then link everything
 Day to day: `just link` after adding a file, `just check` to validate the
 zsh/ghostty configs, plain `just` to list recipes.
 
+Everything targets macOS *and* Ubuntu: shell files detect their environment
+at runtime (brew vs apt paths, GNU vs BSD `ls`), `just deps` dispatches on
+OS, emacs splits via `init-osx.el`/`init-linux.el`, and machine-local or
+secret config lives in untracked `~/.zshrc.local` / `~/.gitconfig.local`.
+
 ## zsh
 
 | file | runs for | contains |

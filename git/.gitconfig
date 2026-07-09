@@ -18,10 +18,10 @@
 	defaultBranch = main
 [credential "https://github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 # Machine-local, untracked config: credentials, tokens, platform overrides.
 # NEVER put secrets in this tracked file — the repo is public.
 [include]

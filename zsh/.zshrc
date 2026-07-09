@@ -59,19 +59,35 @@ bindkey '^[[3~' delete-char
 autoload -Uz zmv  # pattern renamer: zmv -n '(*).jpeg' '$1.jpg'
 
 # --- aliases ---------------------------------------------------------------
-alias ls='ls -G'
-alias ll='ls -lhG'
-alias la='ls -lahG'
+if ls --color=auto -d . >/dev/null 2>&1; then
+  alias ls='ls --color=auto'   # GNU (Linux)
+else
+  alias ls='ls -G'             # BSD (macOS)
+fi
+alias ll='ls -lh'
+alias la='ls -lah'
 
 # --- tools (each guarded so this file works on machines without them) ------
+# source the first readable candidate; plugins live in different places
+# per package manager (brew on macOS/Linuxbrew, apt on Ubuntu)
+_source_first() {
+  local f
+  for f in "$@"; do
+    [[ -r $f ]] && { source "$f"; return 0 }
+  done
+  return 1
+}
+
 # fzf: ctrl-t file picker, alt-c cd into directory
-command -v fzf >/dev/null && eval "$(fzf --zsh)"
+# (2>/dev/null: Ubuntu's apt fzf can predate the --zsh flag)
+command -v fzf >/dev/null && eval "$(fzf --zsh 2>/dev/null)"
 
 # atuin: ctrl-r history search; arrows stay native (bound above)
 command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
-if [[ -r $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-  source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if _source_first \
+    "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" \
+    /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh; then
   ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 fi
 
@@ -82,8 +98,8 @@ command -v starship >/dev/null && eval "$(starship init zsh)"
 [[ -r $HOME/.zshrc.local ]] && source "$HOME/.zshrc.local"
 
 # syntax highlighting must be sourced after everything that defines widgets
-if [[ -r $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
+_source_first \
+  "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
 
 # zprof

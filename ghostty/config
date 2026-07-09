@@ -20,7 +20,8 @@ mouse-hide-while-typing = true
 # shift+enter inserts a newline (Claude Code, REPLs)
 keybind = shift+enter=text:\n
 
-# Quake-style dropdown from anywhere (macOS will ask for Accessibility access)
+# Quake-style dropdown from anywhere (macOS will ask for Accessibility access).
+# global: keybinds and the macos-* keys below are ignored on Linux builds.
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-position = top
 

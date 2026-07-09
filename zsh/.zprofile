@@ -4,9 +4,11 @@
 
 typeset -U path  # dedupe
 
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+# Homebrew (Apple Silicon) or Linuxbrew, whichever exists
+for _brew in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  [[ -x $_brew ]] && { eval "$($_brew shellenv)"; break }
+done
+unset _brew
 
 [[ -r $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
 
