@@ -1,0 +1,19 @@
+# Starship prompt — https://starship.rs/config/
+# Default prompt format, plus an active-gh-account indicator.
+
+command_timeout = 1000
+
+# Active gh account, read from hosts.yml (cheap, no `gh` subprocess).
+# Loud red when an agent account is active so pushes can't go out
+# under the wrong identity.
+[custom.gh_agent]
+command = '''awk '$1=="user:"{print $2; exit}' "$HOME/.config/gh/hosts.yml"'''
+when = '''awk '$1=="user:"{print $2; exit}' "$HOME/.config/gh/hosts.yml" 2>/dev/null | grep -q agent'''
+style = 'bold red'
+format = '[⏺gh:$output]($style) '
+
+[custom.gh_account]
+command = '''awk '$1=="user:"{print $2; exit}' "$HOME/.config/gh/hosts.yml"'''
+when = '''awk '$1=="user:"{print $2; exit}' "$HOME/.config/gh/hosts.yml" 2>/dev/null | grep -qv agent'''
+style = 'cyan'
+format = '[gh:$output]($style) '
