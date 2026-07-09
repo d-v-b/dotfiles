@@ -20,6 +20,7 @@ link() {
   echo "linked  $dst -> $src"
 }
 
+link claude/CLAUDE.md       "$HOME/.claude/CLAUDE.md"
 link zsh/.zshenv            "$HOME/.zshenv"
 link zsh/.zprofile          "$HOME/.zprofile"
 link zsh/.zshrc             "$HOME/.zshrc"
