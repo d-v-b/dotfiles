@@ -5,3 +5,5 @@ If you make a commit, follow conventional commits and add a trailer: `Assisted-b
 If you have a function `f(a,b,c) -> d` that has internal branching and some error conditions, the ideal way to test is:
 - *one* test function that ensures that for reasonable combinations of `a`,`b`,`c`, the expected `d` is produced
 - *N* test functions, one for each error case. 
+
+When opening a PR, default to the user's fork (`d-v-b/<repo>`). Only open PRs against public projects when explicitly asked to.
