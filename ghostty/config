@@ -17,12 +17,19 @@ copy-on-select = clipboard
 
 mouse-hide-while-typing = true
 
+# Fix garbled line editing over ssh. Ghostty sets TERM=xterm-ghostty, but its
+# terminfo entry lives only inside the app bundle and ssh forwards TERM without
+# TERMINFO, so remote hosts can't resolve it. ssh-terminfo installs the entry on
+# the remote (cached after the first time); ssh-env falls back to xterm-256color
+# when that fails. Omitted features keep their defaults.
+shell-integration-features = ssh-env,ssh-terminfo
+
 # shift+enter inserts a newline (Claude Code, REPLs)
 keybind = shift+enter=text:\n
 
 # Quake-style dropdown from anywhere (macOS will ask for Accessibility access).
 # global: keybinds and the macos-* keys below are ignored on Linux builds.
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:ctrl+space=toggle_quick_terminal
 quick-terminal-position = top
 
 # --- taste; off by default -------------------------------------------------
