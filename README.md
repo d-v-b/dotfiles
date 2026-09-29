@@ -1,8 +1,9 @@
 # my dotfiles
 
-Configs live here, grouped by tool; `./link.sh` symlinks them into `$HOME`.
+Configs live here, grouped by tool; `just link` symlinks them into `$HOME`.
 It's idempotent — safe to re-run any time — and backs up anything it would
-replace to `<name>.pre-dotfiles`. A [justfile](justfile) coordinates it:
+replace to `<name>.pre-dotfiles`. The [justfile](justfile) holds the link
+table and the other setup recipes:
 
 ```sh
 git clone https://github.com/d-v-b/dotfiles ~/dev/dotfiles
