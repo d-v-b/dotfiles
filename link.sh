@@ -21,6 +21,7 @@ link() {
 }
 
 link claude/CLAUDE.md       "$HOME/.claude/CLAUDE.md"
+link agents/AGENTS.md       "$HOME/AGENTS.md"
 link zsh/.zshenv            "$HOME/.zshenv"
 link zsh/.zprofile          "$HOME/.zprofile"
 link zsh/.zshrc             "$HOME/.zshrc"
