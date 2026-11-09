@@ -13,4 +13,4 @@ When posting public content, do not impersonate a human. Describe your actions i
 When writing PR titles and descriptions:
 - Keep the conventional-commit prefix in the title, and start the text after it with a verb describing the effect on the codebase, e.g. `fix(zarr-metadata): reject ...`, `feat(store): copy ...`.
 - After the ":robot:" line, start the body with the changelog fragment text, or two plain sentences if there is no fragment.
-- Put stack bookkeeping (merge order, dependencies on other PRs, rebase notes) under a `<details>` block.
+- Put everything else the agent writes (its summary, design and test notes, review findings, and stack bookkeeping such as merge order, dependencies on other PRs and rebase notes) inside `<details>` blocks, so the visible body stays short and the user can add their own summary above.
