@@ -17,4 +17,11 @@ When writing PR titles and descriptions:
 
 When opening a stack of dependent PRs, only the bottom PR is ready for review; open every PR above it as a draft. A stack can only be merged one PR at a time, so mark the next PR ready only after the one below it merges and the base branch has been merged into it. This holds whether each PR targets its parent branch or every PR targets the base branch.
 
+Adversarially review every substantive change before calling it done or marking its PR ready. Past rounds found a serious bug about 60% of the time, and two thirds of the time in round 1. Run the review this way:
+- Spawn fresh reviewer agents. Give them the diff and the files to read, not your conclusions.
+- Before fixing a finding, confirm it: reproduce it or trace it in the code.
+- Fixes cause many late-round bugs. From round 3 on, review only the latest fix diff and the code it touches.
+- Stop after two rounds in a row with no serious finding. Don't keep looping.
+- Record what happened to each finding (fixed in which commit, or rejected and why) in the PR or as a roborev comment.
+
 Always look for ways we can improve our processes. Suggest holistic fixes instead of repeatedly fixing symptoms of bad design. Self-evaluate when you find yourself looping back. 
